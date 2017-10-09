@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'Amatic SC';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Amatic SC Regular'), local('AmaticSC-Regular'), url('../plugins/fonts/AmaticSC.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+body {
+    font-family: 'Amatic SC', serif;
+}
+
+#engine_logo {
+    width: 150px;
+    padding: 20px;
+}
+
+#logo-header {
+    text-align: center;
+    color: #ffffff;
+}
+
+.search-box {
+    width: 35rem;
+    margin: 0 auto;
+}
+
+input.ipt-search, .input-search-box > button.btn, .input-search-box > ul.dropdown-menu > li {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input.ipt-search {
+    padding: .51rem .75rem;
+    border: none;
+}
+
+.input-search-box > button.btn {
+    padding: .45rem .75rem;
+    background-color: #353638;
+    border-color: #353638;
+}
+
+.search-controls {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-search {
+    background-color: #ff8000;;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+}
+
+.dropdown-opts {
+    min-width: 6rem !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #f9f9f9;
+    background-color: #aeaeae;
+}
+
+.main-container {
+    height: 635px;
+    position: relative;
+}
+
+.main-container > div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+@media only screen  and (min-width: 1366px) {
+    .main-container {
+        height: 635px;
+    }
+}
+
+@media only screen  and (min-width: 1920px) {
+    .main-container {
+        height: 1078px;
+    }
+}
+
+#search-container {
+    background-color: #6b6b6b;
+}
+
+#results-container {
+    background-color: cornflowerblue;
+}

@@ -1,0 +1,60 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reuters Search Engine</title>
+
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/engine_interface.css' %}">
+
+    <!-- Plugin Scripts -->
+    <script src="{% static 'plugins/jquery/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'plugins/popper_js/popper-js-1.12.5.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/smooth-scroll/jquery-smooth-scroll-2.2.0.min.js' %}"></script>
+
+    <script src="{% static 'js/engine_interface.js' %}"></script>
+
+</head>
+<body>
+
+<div id="search-container" class="container-fluid main-container">
+
+    <div>
+        <div id="logo-header">
+            <img id="engine_logo" src="{% static 'img/logo_engine.png' %}" alt="Icon Reuters">
+            <h1>Reuters Collection Search Engine</h1>
+        </div>
+
+        <div class="search-controls">
+            <div class="input-group search-box">
+                <input type="text" class="form-control ipt-search">
+                <div class="input-group-btn input-search-box">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" value="AND">
+                        AND
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-left dropdown-opts">
+                        <li class="dropdown-item">AND</li>
+                        <li class="dropdown-item">OR</li>
+                    </ul>
+                </div>
+            </div>
+            <a type="button" class="btn btn-search smooth" href="#results-container">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                Dig in Collection
+            </a>
+        </div>
+    </div>
+
+
+</div>
+
+<div id="results-container" class="main-container">
+
+</div>
+
+</body>
+</html>

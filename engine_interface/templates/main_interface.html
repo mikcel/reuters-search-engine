@@ -13,7 +13,6 @@
     <script src="{% static 'plugins/jquery/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'plugins/popper_js/popper-js-1.12.5.js' %}"></script>
     <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'plugins/smooth-scroll/jquery-smooth-scroll-2.2.0.min.js' %}"></script>
 
     <script src="{% static 'js/engine_interface.js' %}"></script>
 
@@ -30,7 +29,7 @@
 
         <div class="search-controls">
             <div class="input-group search-box">
-                <input type="text" class="form-control ipt-search">
+                <input id="ipt-search-box" type="text" class="form-control ipt-search">
                 <div class="input-group-btn input-search-box">
                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false" value="AND">
@@ -42,10 +41,10 @@
                     </ul>
                 </div>
             </div>
-            <a type="button" class="btn btn-search smooth" href="#results-container">
+            <button id="search-btn" type="button" class="btn btn-search" onclick="return search_collect()">
                 <i class="fa fa-search" aria-hidden="true"></i>
                 Dig in Collection
-            </a>
+            </button>
         </div>
     </div>
 
@@ -54,6 +53,26 @@
 
 <div id="results-container" class="main-container">
 
+</div>
+
+<!-- MODALS DEFINITION -->
+<div id="msg-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="msg-title" class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="msg-icon" class="d-inline-block">
+                    <i class="fa" aria-hidden="true"></i>
+                </div>
+                <div id="msg-text" class="d-inline-block"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

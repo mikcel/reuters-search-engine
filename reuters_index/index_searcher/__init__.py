@@ -1,10 +1,22 @@
 import nltk
-from reuters_parser import Parser
+import pickle
+
+from ..reuters_parser import Parser
 
 
 class IndexSearcher:
-    def __init__(self, inverted_index):
-        self.inverted_index = inverted_index
+    def __init__(self, inverted_index_path):
+        self.inverted_index_path = inverted_index_path
+        self.inverted_index = None
+        self.open_index()
+
+    def open_index(self):
+
+        try:
+            with open(self.inverted_index_path, "rb") as file_obj:
+                self.inverted_index = pickle.load(file_obj)
+        except (OSError, IOError):
+            print("Error Open index")
 
     def search_index(self, query, exact=True):
 

@@ -1,0 +1,8 @@
+<table id="results">
+    {% for doc in doc_results %}
+        <tr id="results-doc-{{ doc.id }}">
+            <th>{{ doc.title }}</th>
+            <td>{{ doc.body }}</td>
+        </tr>
+    {% endfor %}
+</table>

@@ -7,11 +7,11 @@
 }
 
 @font-face {
-  font-family: 'Droid Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Droid Sans Regular'), local('DroidSans-Regular'), url('../plugins/fonts/DroidSans.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    font-family: 'Droid Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Droid Sans Regular'), local('DroidSans-Regular'), url('../plugins/fonts/DroidSans.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
 
@@ -105,12 +105,22 @@ input.ipt-search {
     }
 }
 
+#loading-img{
+    display: none;
+    height: 288px;
+    width: 288px;
+    background: url("../img/loading_icon.gif") no-repeat center;
+    background-size: 30%;
+    margin: 10px auto auto;
+}
+
 #search-container {
     background-color: #6b6b6b;
 }
 
 #results-container {
     background-color: cornflowerblue;
+    display: none;
 }
 
 /*MODAL STYLE*/

@@ -4,7 +4,7 @@ import os
 from bs4 import BeautifulSoup
 from nltk import tokenize
 from nltk.corpus import stopwords
-from reuters_parser.porter_stemmer import PorterStemmer
+from ..reuters_parser.porter_stemmer import PorterStemmer
 
 STOP_WORDS_30 = ["the", "of", "to", "and", "a", "in", "is", "it", "you", "that", "he", "was", "for", "on", "are",
                  "with", "as", "I", "his", "they", "be", "at", "one", "have", "this", "from", "or", "had", "by", "hot"]
@@ -31,10 +31,13 @@ STOP_WORDS_30_MORE = STOP_WORDS_30 + ["but", "some", "what", "there", "we", "can
 
 
 class Parser:
-    def parse_file(self, file_text="", process_settings=None):
+    def parse_file(self, file_text="", preprocess=True, process_settings=None):
         parsed_docs = self.parse_documents(file_text=file_text)
 
-        return self.tokenize_docs(parsed_docs, process_settings)
+        if preprocess:
+            return self.tokenize_docs(parsed_docs, process_settings)
+        else:
+            return parsed_docs
 
     def parse_documents(self, file_text):
 
@@ -70,6 +73,10 @@ class Parser:
 
             else:
                 doc_info["body"] = None
+
+            doc_date = doc.find("date")
+            if doc_date:
+                doc_info["date"] = doc_date.string
 
             docs.append(doc_info)
 

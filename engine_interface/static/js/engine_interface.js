@@ -1,7 +1,7 @@
 /**
  * Document Ready Function
  * - Sets the handler for the input box dropdown (AND/OR)
- * - Sets smooth scrolling for all elements in the class smooth
+ * - Define event handler for input search box
  */
 $(function () {
 
@@ -9,6 +9,13 @@ $(function () {
         var search_btn = $(".input-search-box > button.dropdown-toggle");
         search_btn.text($(this).text());
         search_btn.val($(this).text());
+    });
+
+
+    $("#ipt-search-box").on('keyup', function (e) {
+        if (e.keyCode === 13) {
+            search_collect();
+        }
     });
 
 });
@@ -31,16 +38,20 @@ function search_collect(){
         url: 'search_query',
         method: 'GET',
         data: {
-            query_string: query
+            query_string: query,
+            option: $(".input-search-box > button.dropdown-toggle").val()
         },
         beforeSend: function(){
-            //Loading Icon
+            $("#search-btn").hide();
+            $("#loading-img").show();
         },
         success: function(){
-            set_scrolling_btn("#results-container");
+
         },
         complete: function(){
-            // Loading Icon (if necessary)
+            $("#loading-img").hide();
+            $("#search-btn").show();
+            scroll_to_container("#results-container");
         }
     });
 
@@ -65,7 +76,6 @@ function msg_modal_setup(msg_title, msg_message, msg_icon_class){
         msg_icon_obj.removeClass(obj_classes.pop());
     }
 
-        console.log(msg_icon_class);
     if(msg_icon_class === undefined || msg_icon_class === ""){
         msg_icon_obj.addClass("fa-warning");
     }else{
@@ -76,7 +86,7 @@ function msg_modal_setup(msg_title, msg_message, msg_icon_class){
 
 }
 
-function set_scrolling_btn(container_selector){
+function scroll_to_container(container_selector){
     $('html, body').animate({
         scrollTop: $(container_selector).offset().top
     }, 700);

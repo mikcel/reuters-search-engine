@@ -97,20 +97,26 @@ input.ipt-search {
     .main-container {
         height: 635px;
     }
+    #results-container{
+        min-height:635px;
+    }
 }
 
 @media only screen  and (min-width: 1920px) {
     .main-container {
         height: 1078px;
     }
+    #results-container{
+        min-height:1078px;
+    }
 }
 
 #loading-img{
     display: none;
-    height: 288px;
-    width: 288px;
+    height: 100px;
+    width: 100px;
     background: url("../img/loading_icon.gif") no-repeat center;
-    background-size: 30%;
+    background-size: 100%;
     margin: 10px auto auto;
 }
 
@@ -119,20 +125,37 @@ input.ipt-search {
 }
 
 #results-container {
-    background-color: cornflowerblue;
+    background-color: #62a0f6;
     display: none;
+    padding-left: 25px;
+    padding-right: 25px;
+    overflow: hidden;
+    padding-top: 5%;
+    height:auto;
 }
 
-/*MODAL STYLE*/
+#results-time{
+    font-weight: bold;
+    padding-left: 30px;
+}
+
+/*MSG MODAL STYLE*/
 .modal-content{
     border-radius: 15px;
 }
 
 .modal-header{
-    background: #ff8000;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     color: white;
+}
+
+#msg-modal .modal-header{
+    background: #ff8000;
+}
+
+#doc-modal .modal-header{
+    background: #62a0f6;
 }
 
 .modal-title{
@@ -141,14 +164,24 @@ input.ipt-search {
 
 .modal-footer > button.btn-primary{
     border: 1px solid #ff8000;
-    background-color: white;
     color: #ff8000;
+    background-color: white;
     font-weight: bold;
     outline: none;
 }
 
+#doc-modal .modal-footer > button.btn-primary{
+    border-color: #62a0f6;
+    color: #62a0f6;
+}
+
 .modal-footer > button.btn-primary:hover{
     background-color: #ff8000;
+    color: #ffffff;
+}
+
+#doc-modal .modal-footer > button.btn-primary:hover{
+    background-color: #62a0f6;
     color: #ffffff;
 }
 
@@ -166,4 +199,69 @@ input.ipt-search {
 #msg-text{
     vertical-align: super;
     font-size: 1.5rem;
+}
+
+#tbl-results{
+    table-layout: fixed;
+    border-spacing: 31px;
+    border-collapse: separate;
+}
+
+.doc-title{
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.doc-title:hover{
+    text-decoration: underline;
+
+}
+
+.doc-body {
+    overflow: hidden;
+    position: relative;
+    line-height: 1.2em;
+    max-height: 3.6em;
+    text-align: justify;
+    margin-right: -1em;
+    padding-right: 1em;
+    font-family: "Droid Sans", serif;
+    font-size: .9rem;
+}
+
+.doc-body:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.doc-body:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+}
+
+.doc-date {
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+#doc-modal .modal-dialog{
+    max-width:600px !important;
+}
+
+#doc-modal-text {
+    font-family: "Droid Sans", serif;
+    text-align: justify;
+    font-size: .9rem;
+}
+
+#doc-modal-date{
+    margin-bottom:0;
+    font-weight:bold;
 }

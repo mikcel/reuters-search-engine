@@ -50,7 +50,7 @@ def search_index(request):
 
 def get_file_docs_text(file_no, doc_list):
     try:
-        with open(os.path.join(COLLECTION_PATH, "reut2-%03d.sgm" % file_no), "r") as reuters_file:
+        with open(os.path.join(COLLECTION_PATH, "reut2-%03d.sgm" % file_no), "rb") as reuters_file:
             file_text = Parser().parse_file(reuters_file.read(), preprocess=False)
     except (OSError, IOError):
         return None

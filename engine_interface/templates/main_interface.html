@@ -52,8 +52,9 @@
 
 </div>
 
-<div id="results-container" class="main-container">
-
+<div id="results-container" class="container-fluid">
+    <div id="results-time">Query Time: <span class="time"></span></div>
+    <div class="container-body"></div>
 </div>
 
 <!-- MODALS DEFINITION -->
@@ -68,6 +69,23 @@
                     <i class="fa" aria-hidden="true"></i>
                 </div>
                 <div id="msg-text" class="d-inline-block"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="doc-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="doc-modal-title" class="modal-title"></h4><br>
+                <h6 id="doc-modal-date" class="modal-date"></h6>
+            </div>
+            <div class="modal-body">
+                <div id="doc-modal-text"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>

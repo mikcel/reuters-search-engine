@@ -34,6 +34,7 @@ function search_collect(){
         return false;
     }
 
+    var query_time = new Date().getTime();
     $.ajax({
         url: 'search_query',
         method: 'GET',
@@ -45,15 +46,32 @@ function search_collect(){
             $("#search-btn").hide();
             $("#loading-img").show();
         },
-        success: function(){
-
+        success: function(results_data){
+            var results_contn = $("#results-container");
+            results_contn.find("div.container-body").first().html($.parseHTML(results_data));
+            results_contn.show();
+            scroll_to_container("#results-container");
+            $("#results-time > span.time").text((new Date().getTime() - query_time)/1000 + "s");
         },
         complete: function(){
             $("#loading-img").hide();
             $("#search-btn").show();
-            scroll_to_container("#results-container");
         }
     });
+
+}
+
+function expand_doc(doc_id){
+
+    var doc_row = $("#reuters-doc-" + doc_id).find("td").first();
+
+    var doc_title = doc_row.find("div.doc-title").first().clone();
+    doc_title.find("span.doc-date").first().remove();
+    $("#doc-modal-title").html(doc_title.html());
+    $("#doc-modal-date").html(doc_row.find("span.doc-date").first().html());
+    $("#doc-modal-text").html(doc_row.find("div.doc-body").first().html());
+
+    $("#doc-modal").modal("show");
 
 }
 

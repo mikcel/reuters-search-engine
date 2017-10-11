@@ -1,8 +1,15 @@
-<table id="results">
+<table id="tbl-results">
     {% for doc in doc_results %}
-        <tr id="results-doc-{{ doc.id }}">
-            <th>{{ doc.title }}</th>
-            <td>{{ doc.body }}</td>
+        <tr id="reuters-doc-{{ doc.id }}">
+            <td>
+                <div class="doc-title" onclick="expand_doc({{ doc.id }})">
+                    {{ doc.title }}
+                    <span class="doc-date">{{ doc.date }}</span>
+                </div>
+                <div class="doc-body">
+                    {{ doc.body }}
+                </div>
+            </td>
         </tr>
     {% endfor %}
 </table>

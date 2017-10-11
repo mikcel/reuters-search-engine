@@ -21,26 +21,33 @@ def index(request):
 
 @csrf_exempt
 def search_index(request):
+
+    # Fetch query parameters
     query = request.GET.get("query_string")
     opt = request.GET.get("option")
 
+    # Check query presence
     if not query:
         return HttpResponse(status=400, content="No Query found.")
 
+    # Check for AND or OR
     exact_query = True
     if opt and opt.lower() == "or":
         exact_query = False
 
+    # Get results (doc_ids) from searcher
     results = INVERTED_INDEX.search_index(query=query, exact=exact_query)
-    print(results)
 
+    # Check that results were found
     if not results or results is None or len(results) == 0:
         return HttpResponse(status=404, content="Sorry:/ No Results Found!")
 
+    # Fetch all the file nos to be read
     file_nos = get_all_file_nos(results)
     if not file_nos or len(file_nos) == 0:
         return HttpResponse(status=404, content="Sorry:/ Cannot get file nos for doc ids!")
 
+    # Get the text for each document in a file
     doc_text_results = list()
     for file_no, doc_list in file_nos.items():
         doc_text_results += get_file_docs_text(file_no, doc_list)
@@ -59,6 +66,9 @@ def get_file_docs_text(file_no, doc_list):
             doc_list_text = list()
             doc_id_list = doc_list
             file_text_idx = 0
+
+            """ Check the file parsed and the docs that pertain to this file - doesn't continue if all docs 
+            were fetched"""
             while file_text_idx < len(file_text) and len(doc_id_list) > 0:
                 doc_data = file_text[file_text_idx]
                 if int(doc_data.get("id")) in doc_list:

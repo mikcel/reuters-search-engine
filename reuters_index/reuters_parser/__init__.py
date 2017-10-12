@@ -1,3 +1,7 @@
+"""
+Script containing classes to parse an entire Reuters collection
+"""
+
 import json
 import re
 import os
@@ -6,9 +10,11 @@ from nltk import tokenize
 from nltk.corpus import stopwords
 from ..reuters_parser.porter_stemmer import PorterStemmer
 
+# 30 most frequent words in English vocabulary
 STOP_WORDS_30 = ["the", "of", "to", "and", "a", "in", "is", "it", "you", "that", "he", "was", "for", "on", "are",
                  "with", "as", "I", "his", "they", "be", "at", "one", "have", "this", "from", "or", "had", "by", "hot"]
 
+# 150 most frequent words in English vocabulary
 STOP_WORDS_30_MORE = STOP_WORDS_30 + ["but", "some", "what", "there", "we", "can", "out", "other", "were", "all",
                                       "your", "when", "up",
                                       "use", "word", "how", "said", "an", "each", "she", "which", "do", "their", "time",
@@ -31,15 +37,31 @@ STOP_WORDS_30_MORE = STOP_WORDS_30 + ["but", "some", "what", "there", "we", "can
 
 
 class Parser:
-    def parse_file(self, file_text="", preprocess=True, process_settings=None):
+    """
+    Class to parse a single SGM file for a Reuters collection
+    """
+
+    def parse_file(self, file_text="", tokenize=True, process_settings=None):
+        """
+        Method to parse a specific file
+        :param file_text: The file text
+        :param tokenize: If needs to tokenize doc text
+        :param process_settings: A dict containing the settings for preprocessing
+        :return: List of the tokens in the file for each document/article
+        """
         parsed_docs = self.parse_documents(file_text=file_text)
 
-        if preprocess:
+        if tokenize:
             return self.tokenize_docs(parsed_docs, process_settings)
         else:
             return parsed_docs
 
     def parse_documents(self, file_text):
+        """
+        Method to parse the documents in a file
+        :param file_text: The file text
+        :return: dict containing the doc id and the corresponding data
+        """
 
         parsed_text = BeautifulSoup(file_text, "html.parser")
 
@@ -47,19 +69,24 @@ class Parser:
         for doc in parsed_text.find_all("reuters"):
 
             doc_info = {}
+
+            # Get doc id
             if doc.attrs.get("newid"):
                 doc_info["id"] = doc.attrs.get("newid")
             else:
                 continue
 
+            # Check if text is present for document
             doc_text = doc.find(re.compile("^text$", re.IGNORECASE))
             if doc_text:
 
+                # Get title
                 find_title = doc_text.find("title")
                 if find_title:
 
                     doc_info["title"] = ' '.join([title_text.strip() for title_text in find_title.stripped_strings])
 
+                    # Get body
                     find_body = doc_text.find("body")
                     if find_body:
                         doc_info["body"] = ' '.join([body_text.strip() for body_text in find_body.stripped_strings])
@@ -74,6 +101,7 @@ class Parser:
             else:
                 doc_info["body"] = None
 
+            # Get doc date
             doc_date = doc.find("date")
             if doc_date:
                 doc_info["date"] = doc_date.string
@@ -83,6 +111,12 @@ class Parser:
         return docs
 
     def tokenize_docs(self, parsed_docs, process_settings):
+        """
+        Method to tokenize and preprocess (based on passed settings) docs text after parsing
+        :param parsed_docs: Docs parsed (dict)
+        :param process_settings: The settings for preprocessing
+        :return: list of dict with doc ids and tokens
+        """
 
         docs_tokens_list = []
         for doc in parsed_docs:

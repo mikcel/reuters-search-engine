@@ -66,6 +66,10 @@ function search_collect(){
 
 }
 
+/**
+ * Method called when click on document title to show complete doc body
+ * @param doc_id - doc id to fetch complete text
+ */
 function expand_doc(doc_id){
 
     var doc_row = $("#reuters-doc-" + doc_id).find("td").first();

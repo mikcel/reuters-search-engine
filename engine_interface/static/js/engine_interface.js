@@ -18,7 +18,16 @@ $(function () {
         }
     });
 
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 100) {
+            $('#btn-back-to-top').fadeIn();
+        } else {
+            $('#btn-back-to-top').fadeOut();
+        }
+    });
+
 });
+
 
 /**
  * Function to process query
@@ -111,6 +120,10 @@ function msg_modal_setup(msg_title, msg_message, msg_icon_class){
 
     $("#msg-modal").modal('show');
 
+}
+
+function scroll_to_top() {
+    $('html, body').animate({scrollTop : 0},800);
 }
 
 function scroll_to_container(container_selector){

@@ -35,6 +35,7 @@ function search_collect(){
     }
 
     var query_time = new Date().getTime();
+    var results_contn = $("#results-container");
     $.ajax({
         url: 'search_query',
         method: 'GET',
@@ -47,11 +48,15 @@ function search_collect(){
             $("#loading-img").show();
         },
         success: function(results_data){
-            var results_contn = $("#results-container");
             results_contn.find("div.container-body").first().html($.parseHTML(results_data));
             results_contn.show();
             scroll_to_container("#results-container");
-            $("#results-time > span.time").text((new Date().getTime() - query_time)/1000 + "s");
+            $("#results-details > span.time").text((new Date().getTime() - query_time)/1000 + "s");
+            $("#results-details > span.doc-no-retrieved").text($("#tbl-results tr").length);
+        },
+        error: function(err){
+            results_contn.hide();
+            msg_modal_setup("Error while processing query", err.responseText);
         },
         complete: function(){
             $("#loading-img").hide();

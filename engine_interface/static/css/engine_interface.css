@@ -95,10 +95,10 @@ input.ipt-search {
 
 @media only screen  and (min-width: 1366px) {
     .main-container {
-        height: 635px;
+        height: 550px;
     }
     #results-container{
-        min-height:635px;
+        min-height: 550px;
     }
 }
 
@@ -134,7 +134,7 @@ input.ipt-search {
     height:auto;
 }
 
-#results-time{
+#results-details{
     font-weight: bold;
     padding-left: 30px;
 }
@@ -264,4 +264,8 @@ input.ipt-search {
 #doc-modal-date{
     margin-bottom:0;
     font-weight:bold;
+}
+
+#results-details span{
+    font-family: "DejaVu Sans", serif;
 }
